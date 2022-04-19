@@ -26,14 +26,14 @@ export class TuiSliderReadonlyDirective {
 
     @HostListener('mousedown', ['$event'])
     @HostListener('touchstart', ['$event'])
-    preventEvent(event: Event) {
+    preventEvent(event: Event): void {
         if (this.readonly === '' || this.readonly) {
             event.preventDefault();
         }
     }
 
     @HostListener('keydown', ['$event'])
-    preventKeyboardInteraction(event: KeyboardEvent) {
+    preventKeyboardInteraction(event: KeyboardEvent): void {
         if (SLIDER_INTERACTION_KEYS.has(event.key)) {
             this.preventEvent(event);
         }

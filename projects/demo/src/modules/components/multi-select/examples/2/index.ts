@@ -49,7 +49,7 @@ export class TuiMultiSelectExample2 {
 
     readonly testValue = new FormControl([databaseMockData[0]]);
 
-    onSearchChange(searchQuery: string) {
+    onSearchChange(searchQuery: string): void {
         this.search$.next(searchQuery);
     }
 

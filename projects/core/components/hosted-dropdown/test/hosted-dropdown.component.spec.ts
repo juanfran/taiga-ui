@@ -102,7 +102,7 @@ describe('TuiHostedDropdown', () => {
             return this.mode === 'can-not-open';
         }
 
-        onEsc() {
+        onEsc(): void {
             this.escCatched = true;
         }
     }

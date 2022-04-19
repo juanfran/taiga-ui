@@ -56,7 +56,7 @@ export class TuiStepperComponent {
 
     @HostListener('keydown.arrowRight', ['$event', '1'])
     @HostListener('keydown.arrowLeft', ['$event', '-1'])
-    onHorizontal(event: Event, step: number) {
+    onHorizontal(event: Event, step: number): void {
         if (this.orientation !== 'horizontal' || !event.target) {
             return;
         }
@@ -67,7 +67,7 @@ export class TuiStepperComponent {
 
     @HostListener('keydown.arrowDown', ['$event', '1'])
     @HostListener('keydown.arrowUp', ['$event', '-1'])
-    onVertical(event: Event, step: number) {
+    onVertical(event: Event, step: number): void {
         if (this.orientation !== 'vertical' || !event.target) {
             return;
         }
@@ -86,7 +86,7 @@ export class TuiStepperComponent {
         return index === this.activeItemIndex;
     }
 
-    activate(index: number) {
+    activate(index: number): void {
         if (this.activeItemIndex === index) {
             return;
         }
@@ -95,7 +95,7 @@ export class TuiStepperComponent {
         this.activeItemIndexChange.emit(index);
     }
 
-    private moveFocus(current: EventTarget, step: number) {
+    private moveFocus(current: EventTarget, step: number): void {
         const steps = getOriginalArrayFromQueryList(this.steps).map(
             ({nativeElement}) => nativeElement,
         );

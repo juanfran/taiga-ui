@@ -108,15 +108,15 @@ export class TuiDropdownBoxComponent implements AfterViewChecked {
         return {...context, activeZone};
     }
 
-    ngAfterViewChecked() {
+    ngAfterViewChecked(): void {
         this.calculatePositionAndSize();
     }
 
-    onTopFocus() {
+    onTopFocus(): void {
         this.moveFocusOutside(true);
     }
 
-    onBottomFocus() {
+    onBottomFocus(): void {
         this.moveFocusOutside(false);
     }
 
@@ -126,7 +126,7 @@ export class TuiDropdownBoxComponent implements AfterViewChecked {
         return !!getClosestElement(this.directive.host, 'tui-dialog-host');
     }
 
-    private calculatePositionAndSize() {
+    private calculatePositionAndSize(): void {
         const {clientRect} = this.directive;
         const {style} = this.elementRef.nativeElement;
         const hostRect = this.directive.fixed
@@ -194,7 +194,7 @@ export class TuiDropdownBoxComponent implements AfterViewChecked {
         style: CSSStyleDeclaration,
         directiveRect: ClientRect,
         hostRect: ClientRect,
-    ) {
+    ): void {
         const offset = this.directive.sided
             ? this.elementRef.nativeElement.getBoundingClientRect().width + DEFAULT_MARGIN
             : 0;
@@ -242,7 +242,7 @@ export class TuiDropdownBoxComponent implements AfterViewChecked {
         style: CSSStyleDeclaration,
         directiveRect: ClientRect,
         hostRect: ClientRect,
-    ) {
+    ): void {
         const windowHeight = this.windowRef.innerHeight;
         // Maximum height of the box
         const boxHeightLimit = Math.min(
@@ -341,7 +341,7 @@ export class TuiDropdownBoxComponent implements AfterViewChecked {
      * @param style dropdownBox elementRef styles object
      * @param directiveRect ClientRect of hosting directive
      */
-    private calculateWidth(style: CSSStyleDeclaration, directiveRect: ClientRect) {
+    private calculateWidth(style: CSSStyleDeclaration, directiveRect: ClientRect): void {
         style.width =
             this.directive.limitMinWidth === 'fixed' && !this.directive.sided
                 ? px(directiveRect.width)
@@ -358,7 +358,7 @@ export class TuiDropdownBoxComponent implements AfterViewChecked {
         style.maxWidth = '';
     }
 
-    private moveFocusOutside(previous: boolean) {
+    private moveFocusOutside(previous: boolean): void {
         const {host} = this.directive;
         const {ownerDocument} = host;
         const root = ownerDocument ? ownerDocument.body : host;

@@ -143,7 +143,7 @@ export class TuiRangeComponent
 
     @HostListener('focusin', ['true'])
     @HostListener('focusout', ['false'])
-    onFocused(focused: boolean) {
+    onFocused(focused: boolean): void {
         this.updateFocused(focused);
     }
 
@@ -151,7 +151,7 @@ export class TuiRangeComponent
     @HostListener('keydown.arrowRight.prevent', ['1', '$event.target'])
     @HostListener('keydown.arrowLeft.prevent', ['-1', '$event.target'])
     @HostListener('keydown.arrowDown.prevent', ['-1', '$event.target'])
-    changeByStep(coefficient: number, target: HTMLElement) {
+    changeByStep(coefficient: number, target: HTMLElement): void {
         const [sliderLeftRef, sliderRightRef] = this.slidersRefs;
         const leftThumbElement = sliderLeftRef.nativeElement;
         const rightThumbElement = sliderRightRef.nativeElement;
@@ -173,7 +173,7 @@ export class TuiRangeComponent
         }
     }
 
-    processValue(value: number, right: boolean) {
+    processValue(value: number, right: boolean): void {
         const guardedValue = this.valueGuard(value);
 
         if (right) {
@@ -198,11 +198,11 @@ export class TuiRangeComponent
         return [[0, min], ...(keySteps || []), [100, max]];
     }
 
-    private updateStart(value: number) {
+    private updateStart(value: number): void {
         this.updateValue([Math.min(value, this.value[1]), this.value[1]]);
     }
 
-    private updateEnd(value: number) {
+    private updateEnd(value: number): void {
         this.updateValue([this.value[0], Math.max(value, this.value[0])]);
     }
 }

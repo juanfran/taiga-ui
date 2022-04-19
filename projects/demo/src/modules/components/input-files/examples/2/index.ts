@@ -14,17 +14,17 @@ export class TuiInputFilesExample2 {
     readonly control = new FormControl([]);
     rejectedFiles: readonly TuiFileLike[] = [];
 
-    onReject(files: readonly TuiFileLike[]) {
+    onReject(files: readonly TuiFileLike[]): void {
         this.rejectedFiles = [...this.rejectedFiles, ...files];
     }
 
-    removeFile({name}: File) {
+    removeFile({name}: File): void {
         this.control.setValue(
             this.control.value.filter((current: File) => current.name !== name),
         );
     }
 
-    clearRejected({name}: TuiFileLike) {
+    clearRejected({name}: TuiFileLike): void {
         this.rejectedFiles = this.rejectedFiles.filter(
             rejected => rejected.name !== name,
         );

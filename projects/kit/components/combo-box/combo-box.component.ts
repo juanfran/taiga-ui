@@ -153,11 +153,11 @@ export class TuiComboBoxComponent<T>
         };
     }
 
-    onActiveZone(active: boolean) {
+    onActiveZone(active: boolean): void {
         this.updateFocused(active);
     }
 
-    checkOption(option: T) {
+    checkOption(option: T): void {
         if (!this.isStrictMatch(option)) {
             return;
         }
@@ -166,7 +166,7 @@ export class TuiComboBoxComponent<T>
         this.updateSearch(null);
     }
 
-    handleOption(item: T) {
+    handleOption(item: T): void {
         this.setNativeValue(this.stringify(item));
         this.focusInput();
         this.close();
@@ -174,7 +174,7 @@ export class TuiComboBoxComponent<T>
         this.updateValue(item);
     }
 
-    onFieldKeyDownEnter(event: KeyboardEvent) {
+    onFieldKeyDownEnter(event: KeyboardEvent): void {
         if (this.open) {
             event.preventDefault();
         }
@@ -190,7 +190,7 @@ export class TuiComboBoxComponent<T>
         this.close();
     }
 
-    onValueChange(value: string) {
+    onValueChange(value: string): void {
         this.updateSearch(value);
 
         const match = this.accessor?.getOptions().find(item => this.isStrictMatch(item));
@@ -209,15 +209,15 @@ export class TuiComboBoxComponent<T>
         this.hostedDropdown?.updateOpen(true);
     }
 
-    updateValue(value: T | null) {
+    updateValue(value: T | null): void {
         super.updateValue(value);
     }
 
-    onHovered(hovered: boolean) {
+    onHovered(hovered: boolean): void {
         this.updateHovered(hovered);
     }
 
-    toggle() {
+    toggle(): void {
         this.hostedDropdown?.updateOpen(!this.open);
     }
 
@@ -225,11 +225,11 @@ export class TuiComboBoxComponent<T>
         return this.strictMatcher(item, this.search || '', this.stringify);
     }
 
-    private close() {
+    private close(): void {
         this.hostedDropdown?.updateOpen(false);
     }
 
-    private updateSearch(search: string | null) {
+    private updateSearch(search: string | null): void {
         if (this.search === search) {
             return;
         }
@@ -238,13 +238,13 @@ export class TuiComboBoxComponent<T>
         this.searchChange.emit(search);
     }
 
-    private setNativeValue(value: string) {
+    private setNativeValue(value: string): void {
         if (this.nativeFocusableElement) {
             this.nativeFocusableElement.value = value;
         }
     }
 
-    private focusInput(preventScroll: boolean = false) {
+    private focusInput(preventScroll: boolean = false): void {
         if (this.nativeFocusableElement) {
             setNativeFocused(this.nativeFocusableElement, true, preventScroll);
         }

@@ -38,17 +38,17 @@ export class LandingComponent {
         return this.current ? '#5f6ed0' : '#3dc67c';
     }
 
-    onIntersection([{isIntersecting}]: IntersectionObserverEntry[], index: number) {
+    onIntersection([{isIntersecting}]: IntersectionObserverEntry[], index: number): void {
         if (isIntersecting) {
             this.current = index;
         }
     }
 
-    onDay(date: TuiDay) {
+    onDay(date: TuiDay): void {
         this.date = date;
     }
 
-    onClick() {
+    onClick(): void {
         this.blocks.forEach(({nativeElement}, index) => {
             if (index === this.current + 1) {
                 nativeElement.scrollIntoView();
@@ -56,7 +56,7 @@ export class LandingComponent {
         });
     }
 
-    stop(e?: KeyboardEvent) {
+    stop(e?: KeyboardEvent): void {
         if (e && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
             e.stopPropagation();
         }
