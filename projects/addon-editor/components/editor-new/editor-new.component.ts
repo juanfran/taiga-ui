@@ -27,6 +27,7 @@ import {
     TuiBooleanHandler,
     tuiDefaultProp,
 } from '@taiga-ui/cdk';
+import {TuiDropdownSelectionDirective} from '@taiga-ui/kit';
 import {Editor} from '@tiptap/core';
 import {Mark} from 'prosemirror-model';
 import {Observable} from 'rxjs';
@@ -52,6 +53,11 @@ export class TuiEditorNewComponent
 {
     @ViewChild(TuiEditLinkComponent, {read: ElementRef})
     private readonly editLink?: ElementRef<HTMLElement>;
+
+    @ViewChild(TuiDropdownSelectionDirective)
+    private readonly dropdownSelection?: TuiDropdownSelectionDirective;
+
+    private previousSelectedLink: string | null = null;
 
     @Input()
     @tuiDefaultProp()
@@ -106,10 +112,29 @@ export class TuiEditorNewComponent
         this.updateHovered(hovered);
     }
 
+    selectedLink(url: string) {
+        this.previousSelectedLink = url;
+    }
+
     selectLinkIfClosest() {
-        if (this.getMarkedLinkBeforeSelectClosest()) {
+        const link = this.getMarkedLinkBeforeSelectClosest();
+        const href = link?.attrs.href ?? null;
+
+        if (link) {
             this.editor?.selectClosest();
+
+            /**
+             * @note:
+             * if we already have a dropdown with link editing open,
+             * we need to reopen with a new template
+             */
+            if (this.previousSelectedLink != null && href != this.previousSelectedLink) {
+                this.dropdownSelection?.closeDropdownBox();
+                this.dropdownSelection?.openDropdownBox();
+            }
         }
+
+        this.previousSelectedLink = href;
     }
 
     onActiveZone(active: boolean) {
@@ -127,6 +152,7 @@ export class TuiEditorNewComponent
 
     removeLink() {
         this.editor?.unsetLink();
+        this.dropdownSelection?.closeDropdownBox();
     }
 
     ngOnDestroy() {
