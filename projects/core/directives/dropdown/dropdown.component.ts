@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    // HostBinding,
     Inject,
     OnDestroy,
     Optional,
@@ -30,6 +31,7 @@ import {map, takeUntil} from 'rxjs/operators';
 import {TuiDropdownDirective} from './dropdown.directive';
 import {TuiDropdownHoverDirective} from './dropdown-hover.directive';
 import {TUI_DROPDOWN_OPTIONS, TuiDropdownOptions} from './dropdown-options.directive';
+import {TuiDropdownAnimation} from '@taiga-ui/core';
 
 /**
  * @description:
@@ -53,12 +55,20 @@ import {TUI_DROPDOWN_OPTIONS, TuiDropdownOptions} from './dropdown-options.direc
     changeDetection: ChangeDetectionStrategy.Default,
 })
 export class TuiDropdownComponent implements OnDestroy {
+    // fix the issue
+    get animation(): any {
+        return {
+            value: TuiDropdownAnimation.FadeInTop,
+            ...this.test,
+        };
+    }
+
     constructor(
         @Inject(TuiVisualViewportService) visualViewportService: TuiVisualViewportService,
         @Inject(TuiPositionService) position$: Observable<TuiPoint>,
         @Self() @Inject(TuiDestroyService) destroy$: Observable<void>,
         @Inject(TuiDropdownDirective) readonly directive: TuiDropdownDirective,
-        @Inject(TUI_ANIMATION_OPTIONS) readonly animation: AnimationOptions,
+        @Inject(TUI_ANIMATION_OPTIONS) readonly test: AnimationOptions,
         @Inject(ElementRef) private readonly el: ElementRef<HTMLElement>,
         @Inject(AbstractTuiPortalHostComponent)
         private readonly host: AbstractTuiPortalHostComponent,

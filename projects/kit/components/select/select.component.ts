@@ -23,6 +23,7 @@ import {
     tuiIsNativeFocused,
 } from '@taiga-ui/cdk';
 import {
+    TUI_ANIMATION_OPTIONS,
     TUI_TEXTFIELD_CLEANER,
     tuiAsDataListHost,
     tuiAsOptionContent,
@@ -55,6 +56,16 @@ import {TUI_SELECT_OPTIONS, TuiSelectOptions} from './select-options';
         tuiAsControl(TuiSelectComponent),
         tuiAsDataListHost(TuiSelectComponent),
         tuiAsOptionContent(TUI_SELECT_OPTION),
+        {
+            provide: TUI_ANIMATION_OPTIONS,
+            useFactory: () => {
+                return {
+                    params: {
+                        duration: 0,
+                    },
+                };
+            },
+        },
     ],
     viewProviders: [FIXED_DROPDOWN_CONTROLLER_PROVIDER],
 })
